@@ -2418,85 +2418,230 @@ public:
 //   }
 // };
 
-#include <cmath>
-class Solution
-{
+// #include <cmath>
+// class Solution
+// {
+// public:
+//   int n(int n)
+//   {
+//     for (size_t i = 0; i < 1000; i++)
+//     {
+//       if (n < pow(2, i))
+//         return i;
+//     }
+//     return 0;
+//   };
+//   map<int , int> hash;
+//   function<int(int, int)> funand = [](int m, int n)
+//   { return m & n; };
+//   function<int(int, int)> funor = [](int m, int n)
+//   { return m | n; };
+//   int cup(function<int(int, int)> fun, int m, int n)
+//   {
+//     auto sumx = fun(m, n);
+//     if (hash.find(sumx) != hash.end())
+//       return hash[sumx];
+//     int count = 0;
+//     int aa = sumx;
+//     while (sumx)
+//     {
+//       if (sumx & 1 == 1)
+//         count++;
+//       sumx >>= 1;
+//     }
+//     hash[aa] = count;
+//     return count;
+//   };
+
+//   int sumx(int m, int n)
+//   {
+//     return cup(funand, m, n) + cup(funor, m, n);
+//   }
+
+//   long long countExcellentPairs(vector<int> &nums, int k)
+//   {
+//     sort(nums.begin(), nums.end());
+//     if (2 * n(nums[nums.size() - 1]) < k)
+//       return 0;
+
+//     int left = 0;
+//     int count = 0;
+//     for (size_t i = nums.size(); i > 0; i--)
+//     {
+
+//       int righ = i-1;
+//       left = 0;
+//       if (2 * n(nums[righ]) < k)
+//         break;
+//       while (left <= righ)
+//       {
+//         if (sumx(nums[left], nums[righ]) >= k)
+//         {
+//           count++;
+//           if (nums[left] != nums[righ])
+//             count++;
+
+//           while (left < righ && (nums[left] == nums[left + 1]))
+//           {
+//             left++;
+//           }
+//           left++;
+//           while (left < righ && (nums[righ] == nums[righ - 1]))
+//           {
+//             righ--;
+//           }
+//         }
+//         else if (sumx(nums[left], nums[righ]) < k)
+//           left++;
+//       }
+//     }
+//     return count;
+//   }
+// };
+
+// class Solution {
+// public:
+//     int hardestWorker(int n, vector<vector<int>>& logs) {
+//       int maxid = -1;
+//       int maxt = -1;
+//       int pre = 0;
+//       for (size_t i = 0; i < logs.size(); i++)
+//       {
+//         auto tt = logs[i][1] - pre ;
+//         if (tt > maxt )
+//         {
+//           maxt = tt;
+//           maxid = i;
+//         }
+//         pre = logs[i][1];
+//       }
+//       return      maxid;
+//     }
+// };
+
+// class Solution
+// {
+// public:
+//   int numberOfArrays(vector<int> &differences, int lower, int upper)
+//   {
+//     if (differences.size() == 1)
+//       return 0;
+//     namespace ranges = std::ranges;
+//     int minid = ranges::distance(differences.begin(), ranges::min_element(differences));
+//     int maxid = ranges::distance(differences.begin(), ranges::max_element(differences));
+
+//     vector<int> newv(differences.size() + 1, 0);
+
+//     newv[minid + 1] = lower;
+//     for (size_t i = minid; i >= 0; i--)
+//     {
+//       auto js = newv[i + 1] - differences[i];
+//       if (js < lower || js > upper)
+//         return 0;
+//       newv[i] = js;
+//     }
+
+//     for (size_t i = minid; i < newv.size(); i++)
+//     {
+//       auto js = newv[i] + differences[i];
+//       if (js < lower || js > upper)
+//         return 0;
+//       newv[i + 1] = js;
+//     }
+//   }
+// };
+
+// class Solution {
+// public:
+//     int countConsistentStrings(string allowed, vector<string>& words) {
+//       bool isin = true;
+//       int re = 0;
+//       for (auto &&str : words)
+//       {
+//         isin = true;
+//         for (auto &&i : str)
+//         {
+//           if (allowed.find(i) == std::string::npos)
+//           {
+//             isin = false;
+//             break;
+//           }
+//         }
+//         if (isin)
+//           re++;
+//       }
+//       return re;
+
+//     }
+// };
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+
+输入: head = [0,1,2,3], nums = [0,1,3]
+输出: 2
+解释: 链表中,0 和 1 是相连接的，且 nums 中不包含 2，所以 [0, 1] 是 nums 的一个组件，同理 [3] 也是一个组件，故返回 2。
+
+
+输入: head = [0,1,2,3,4], nums = [0,3,1,4]
+输出: 2
+解释: 链表中，0 和 1 是相连接的，3 和 4 是相连接的，所以 [0, 1] 和 [3, 4] 是两个组件，故返回 2。
+
+ *
+
+ */
+
+// class Solution
+// {
+// public:
+//   int numComponents(ListNode *head, const vector<int> &nums)
+//   {
+//     auto first = head;
+
+//     int re = 0;
+//     while (first)
+//     {
+//       bool ifind = false;
+
+//       while (first && find(nums.begin(), nums.end(), first->val) != nums.end())
+//       {
+//         ifind = true;
+//         first = first->next;
+//         continue;
+//       }
+//       if (ifind)
+//         re++;
+
+//         if (first)
+//           first = first->next;
+//     }
+//     return re;
+//   }
+// };
+
+// class Solution {
+// public:
+//     string generateTheString(int n) {
+//       string s(n, 'a');
+//       if (n % 2 == 0)
+//         s[0] = 'b';
+
+//       return s;
+//     }
+// };
+
+class Solution {
 public:
-  int n(int n)
-  {
-    for (size_t i = 0; i < 1000; i++)
-    {
-      if (n < pow(2, i))
-        return i;
+    int minFlips(int a, int b, int c) {
+
     }
-    return 0;
-  };
-  map<int , int> hash;
-  function<int(int, int)> funand = [](int m, int n)
-  { return m & n; };
-  function<int(int, int)> funor = [](int m, int n)
-  { return m | n; };
-  int cup(function<int(int, int)> fun, int m, int n)
-  {
-    auto sumx = fun(m, n);
-    if (hash.find(sumx) != hash.end())
-      return hash[sumx];
-    int count = 0;
-    int aa = sumx;
-    while (sumx)
-    {
-      if (sumx & 1 == 1)
-        count++;
-      sumx >>= 1;
-    }
-    hash[aa] = count;
-    return count;
-  };
-
-  int sumx(int m, int n)
-  {
-    return cup(funand, m, n) + cup(funor, m, n);
-  }
-
-  long long countExcellentPairs(vector<int> &nums, int k)
-  {
-    sort(nums.begin(), nums.end());
-    if (2 * n(nums[nums.size() - 1]) < k)
-      return 0;
-
-    int left = 0;
-    int count = 0;
-    for (size_t i = nums.size(); i > 0; i--)
-    {
-
-      int righ = i-1;
-      left = 0;
-      if (2 * n(nums[righ]) < k)
-        break;
-      while (left <= righ)
-      {
-        if (sumx(nums[left], nums[righ]) >= k)
-        {
-          count++;
-          if (nums[left] != nums[righ])
-            count++;
-
-          while (left < righ && (nums[left] == nums[left + 1]))
-          {
-            left++;
-          }
-          left++;
-          while (left < righ && (nums[righ] == nums[righ - 1]))
-          {
-            righ--;
-          }
-        }
-        else if (sumx(nums[left], nums[righ]) < k)
-          left++;
-      }
-    }
-    return count;
-  }
 };
 
 /**
@@ -2513,15 +2658,15 @@ int main(int, char **)
   vector<int> t2 = {105, 70, 70, 175, 105, 105, 105};
   // vector<string> ss1 =   {"24","37","96","04"};
   // vector<vector<int>> ss2 = {{2,1},{2,2}};
+  // [3,4,0,2,1]
+  // [4]
 
   vector<string> ss1 = {"7062852270146477248296527", "8433780701670054260678760", "8699421879227760163019849", "7708276868930722275669591", "5074829025635016047494703", "5896327888048068611168261", "7260190089159791786288449", "5781138574494763732963172", "3205437840168891808107684", "5391561242659929681878939", "9291899334089749518212291", "8708326599236172552237668", "3618812336262173046978703", "4807369922822632937475631", "0316892108136392839378991", "8367705082821693868985331", "2107315678805939657548178", "9907244113601275760502412", "4677127508895251971677534", "1439698519575527518052264", "2511775183710951968637133", "6664307020593448841804234", "3713561166640567497350787", "9222117189171058392839857", "9814178925901695758525967", "1730249210741355068666166", "4032999420142272853817457"};
   vector<vector<int>> ss2 = {{5, 21}, {23, 7}, {6, 2}, {27, 8}, {14, 21}, {25, 21}, {26, 23}, {12, 19}, {7, 8}, {25, 9}, {11, 8}, {17, 17}, {21, 8}, {1, 18}, {16, 18}, {13, 1}, {27, 7}, {11, 1}, {4, 7}, {24, 14}, {9, 1}, {14, 25}, {2, 13}, {7, 21}, {15, 1}, {9, 6}, {7, 2}, {23, 20}, {15, 20}, {21, 1}};
 
   vector<string> foods = {"kimchi", "miso", "sushi", "moussaka", "ramen", "bulgogi"};
   vector<string> cuisines = {"korean", "japanese", "japanese", "greek", "japanese", "korean"};
-  vector<int> ratings = {1, 2, 3, 1};
-  Solution s;
-  s.countExcellentPairs(ratings, 3);
+  vector<int> ratings = {3, 4, 0, 2, 1};
 
   // FoodRatings foodRatings(foods, cuisines, ratings);
   // foodRatings.highestRated("korean");    // 返回 "kimchi"
@@ -2541,22 +2686,16 @@ int main(int, char **)
   root->right->left = new TreeNode(15);
   root->right->right = new TreeNode(7);
 
-  ListNode *list = new ListNode(1);
-  list->next = new ListNode(2);
-  // list->next->next = new ListNode(3);
-  // list->next->next->next = new ListNode(4);
-  // list->next->next->next->next = new ListNode(5);
+  ListNode *list = new ListNode(3);
+  list->next = new ListNode(4);
+  list->next->next = new ListNode(0);
+  list->next->next->next = new ListNode(2);
+  list->next->next->next->next = new ListNode(1);
   // list->next->next->next->next->next = new ListNode(6);
   // list->next->next->next->next->next->next = new ListNode(7);
 
-  ListNode *lis1 = new ListNode(1);
-  lis1->next = new ListNode(3);
-  lis1->next->next = new ListNode(6);
-
-  ListNode *lis2 = new ListNode(2);
-  lis2->next = new ListNode(4);
-
-  vector<ListNode *> vlist = {list, lis1, lis2};
+  Solution s;
+  s.numComponents(list, {4});
 }
 
 //[1,2,2,3,null,null,3,4,null,null,4]

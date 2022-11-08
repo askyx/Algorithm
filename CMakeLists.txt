@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0.0)
 project(Algorithm VERSION 0.1.0)
 
 # CMAKE_CXX_STANDARD()
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 include(CTest)
 enable_testing()
 
